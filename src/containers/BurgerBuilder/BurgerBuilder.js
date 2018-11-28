@@ -57,6 +57,7 @@ class BurgerBuilder extends Component {
     if (oldCount <=- 0) {
       return
     }
+
     const updatedCount = oldCount - 1;
     const updatedIngredients = { ...this.state.ingredients };
     updatedIngredients[type] = updatedCount;
@@ -102,6 +103,7 @@ class BurgerBuilder extends Component {
             />
           </Modal>
           <Burger ingredients={this.state.ingredients} />
+
           <BuildControls
             ingredientAdded={this.addIngredientHandler}
             ingredientRemoved={this.removeIngredientHandler}
