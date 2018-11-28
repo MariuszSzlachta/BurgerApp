@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import classes from './BurgerIngredient.css';
 import PropTypes from 'prop-types';
+
+import classes from './BurgerIngredient.css';
 
 class BurgerIngredient extends Component {
 
