@@ -1,11 +1,10 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT } from './actions';
-import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 const initialState = {
   ingredients: {
     salad: 0,
     bacon: 0,
-    chease: SSL_OP_SSLEAY_080_CLIENT_DH_BUG,
+    cheese: 0,
     meat: 0
   },
   totalPrice: 4
@@ -21,7 +20,7 @@ const reducer = (state = initialState, action) => {
           [action.ingredientName]: state.ingredients[action.ingredientName] + 1
         }
       }
-    
+
     case REMOVE_INGREDIENT:
       return {
         ...state,
