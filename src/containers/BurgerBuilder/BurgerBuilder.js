@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addIngredient, removeIngredient, setIngredientsRequest } from '../../store/actions/ingredients';
 import axios from '../../axios-orders';
-import { addIngredient, removeIngredient } from '../../store/actions';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
@@ -14,17 +14,9 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class BurgerBuilder extends Component {
   state = {
     purchasing: false,
-    loading: false,
-    error: null
   }
   componentDidMount() {
-    // axios.get('https://burger-app1.firebaseio.com/ingredients.json')
-    //   .then(res => {
-    //     this.setState({ ingredients: res.data})
-    //   })
-    //   .catch(error => {
-    //     this.setState({error: true})
-    //   })
+    this.props.onSetIngredientsRequest();
   }
 
   updatePurchaseState (ingredients) {
@@ -60,7 +52,7 @@ class BurgerBuilder extends Component {
 
     // order summary
     let orderSummary = null;
-    let burger = this.state.error ? <p style={{textAlign: 'center'}}>Ingredients can't be loaded</p> : <Spinner />
+    let burger = this.props.error ? <p style={{textAlign: 'center'}}>Ingredients can't be loaded</p> : <Spinner />
 
     // burger
     if (this.props.ingredients) {
@@ -86,9 +78,6 @@ class BurgerBuilder extends Component {
         />
       )
     }
-    if (this.state.loading) {
-      orderSummary = <Spinner />
-    }
 
     return (
       <div>
@@ -104,16 +93,19 @@ class BurgerBuilder extends Component {
 }
 
 const mapStateToProps = state => {
+  const { totalPrice, ingredients, error } = state
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    ingredients,
+    totalPrice,
+    error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onAddIngredient: (ingredientName) => dispatch(addIngredient(ingredientName)),
-    onRemoveIngredient: (ingredientName) => dispatch(removeIngredient(ingredientName))
+    onRemoveIngredient: (ingredientName) => dispatch(removeIngredient(ingredientName)),
+    onSetIngredientsRequest: () => dispatch(setIngredientsRequest())
   }
 }
 
