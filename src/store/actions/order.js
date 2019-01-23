@@ -3,6 +3,7 @@ import axios from '../../axios-orders';
 export const PURCHASE_BURGER_SUCCESS = 'PURCHASE_BURGER_SUCCESS';
 export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 export const PURCHASE_BURGER_START = 'PURCHASE_BURGER_START';
+export const PURCHASE_INIT = 'PURCHASE_INIT';
 
 export const purchaseBurgerSuccess = (orderID, orderData) => {
   return {
@@ -38,3 +39,8 @@ export const purchaseBurgerRequest = (orderData) => {
   }
 }
 
+export const purchaseInit = () => {
+  return {
+    type: PURCHASE_INIT
+  }
+}

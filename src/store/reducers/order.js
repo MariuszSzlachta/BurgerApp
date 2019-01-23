@@ -1,9 +1,10 @@
-import { PURCHASE_BURGER_SUCCESS, PURCHASE_BURGER_FAIL, PURCHASE_BURGER_START } from '../actions/order';
+import { PURCHASE_BURGER_SUCCESS, PURCHASE_BURGER_FAIL, PURCHASE_BURGER_START, PURCHASE_INIT } from '../actions/order';
 
 const initialState = {
   orders: [],
   loading: false,
-  error: false
+  error: false,
+  purchased: false
 }
 
 const orderReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const orderReducer = (state = initialState, action) => {
     case PURCHASE_BURGER_SUCCESS:
       const newOrder = {
         ...action.orderData,
-        id: action.orderID
+        id: action.orderID,
+        purchased: true
       }
       return {
         ...state,
@@ -30,6 +32,12 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      }
+
+    case PURCHASE_INIT:
+      return {
+        ...state,
+        purchased: false
       }
 
     default:

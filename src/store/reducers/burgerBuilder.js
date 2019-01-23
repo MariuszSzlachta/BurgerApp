@@ -1,5 +1,4 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from '../actions/ingredients';
-import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder';
 
 const initialState = {
   ingredients: null,

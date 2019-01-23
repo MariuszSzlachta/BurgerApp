@@ -189,7 +189,7 @@ class ContactData extends Component {
     return (
       <div className={classes.ContactData}>
         <h4>Enter your Contact Data</h4>
-        {form} 
+        {form}
       </div>
     );
   }

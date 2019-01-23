@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addIngredient, removeIngredient, setIngredientsRequest } from '../../store/actions/ingredients';
+import { purchaseInit } from '../../store/actions/order';
 import axios from '../../axios-orders';
 
 import Aux from '../../hoc/Auxiliary/Auxiliary';
@@ -39,6 +40,8 @@ class BurgerBuilder extends Component {
   }
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchase();
+    console.log('siemka');
     this.props.history.push('/checkout')
   }
 
@@ -105,7 +108,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddIngredient: (ingredientName) => dispatch(addIngredient(ingredientName)),
     onRemoveIngredient: (ingredientName) => dispatch(removeIngredient(ingredientName)),
-    onSetIngredientsRequest: () => dispatch(setIngredientsRequest())
+    onSetIngredientsRequest: () => dispatch(setIngredientsRequest()),
+    onInitPurchase: () => dispatch(purchaseInit())
   }
 }
 
