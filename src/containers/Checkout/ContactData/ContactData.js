@@ -94,7 +94,7 @@ class ContactData extends Component {
             }
           ]
         },
-        value: '',
+        value: 'fastest',
         validation: {
           required: false
         },
@@ -196,10 +196,12 @@ class ContactData extends Component {
 }
 
 const mapStateToProps = state => {
+  const { ingredients, totalPrice } = state.burgerBuilderReducer;
+  const { loading } = state.orderReducer;
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    loading: state.loading
+    ingredients,
+    totalPrice,
+    loading
   }
 }
 
