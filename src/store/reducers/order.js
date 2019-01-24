@@ -13,10 +13,10 @@ const orderReducer = (state = initialState, action) => {
       const newOrder = {
         ...action.orderData,
         id: action.orderID,
-        purchased: true
       }
       return {
         ...state,
+        purchased: true,
         loading: false,
         orders: state.orders.concat(newOrder)
       };

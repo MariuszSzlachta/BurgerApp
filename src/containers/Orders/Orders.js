@@ -30,7 +30,7 @@ class Orders extends Component {
         this.setState({loading: false});
       })
   }
-  
+
   render() {
     return (
       <div>

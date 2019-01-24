@@ -17,9 +17,9 @@ class Checkout extends Component {
 
   render() {
     let summary = <Redirect to="/" />;
-    const purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
-
+    
     if (this.props.ingredients) {
+      const purchasedRedirect = this.props.purchased ? <Redirect to="/" /> : null;
       summary = (
         <React.Fragment>
           {purchasedRedirect}
