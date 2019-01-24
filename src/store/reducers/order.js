@@ -1,4 +1,11 @@
-import { PURCHASE_BURGER_SUCCESS, PURCHASE_BURGER_FAIL, PURCHASE_BURGER_START, PURCHASE_INIT } from '../actions/order';
+import { 
+  PURCHASE_BURGER_SUCCESS,
+  PURCHASE_BURGER_FAIL,
+  PURCHASE_BURGER_START,
+  PURCHASE_INIT,
+  FETCH_ORDERS_START,
+  FETCH_ORDERS_SUCCESS,
+  FETCH_ORDERS_FAILED } from '../actions/order';
 
 const initialState = {
   orders: [],
@@ -38,6 +45,24 @@ const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         purchased: false
+      }
+    case FETCH_ORDERS_START:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        orders: action.orders
+      }
+
+    case FETCH_ORDERS_FAILED:
+      return {
+        ...state,
+        loading: false
       }
 
     default:
