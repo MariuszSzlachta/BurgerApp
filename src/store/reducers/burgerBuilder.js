@@ -1,4 +1,5 @@
 import { ADD_INGREDIENT, REMOVE_INGREDIENT, SET_INGREDIENTS, FETCH_INGREDIENTS_FAILED } from '../actions/ingredients';
+import { updateObject } from '../utility';
 
 const initialState = {
   ingredients: null,
@@ -15,28 +16,29 @@ const INGREDIENT_PRICES = {
 
 const burgerBuilderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-        },
+    case ADD_INGREDIENT: {
+      const updatedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1};
+      const updatedInredients = updateObject(state.ingredients, updatedIngredient);
+      const updatedState = {
+        ingredients: updatedInredients,
         totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
       }
+      return updateObject(state, updatedState)
+    }
 
-    case REMOVE_INGREDIENT:
-      return {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] - 1
-        },
+    case REMOVE_INGREDIENT: {
+      const updatedIngredient = {[action.ingredientName]: state.ingredients[action.ingredientName] - 1};
+      const updatedIngredients = updateObject(state.ingredients, updatedIngredient);
+      const updatedState = {
+        ingredients: updatedIngredients,
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
       }
+      return updateObject(state.ingredients, updatedState)
+    }
 
-    case SET_INGREDIENTS:
-      return {
+    case SET_INGREDIENTS: {
+
+      return updateObject(state, {
         ...state,
         ingredients: {
           salad: action.ingredients.salad,
@@ -46,12 +48,11 @@ const burgerBuilderReducer = (state = initialState, action) => {
         },
         totalPrice: 4,
         error: false
-      }
+      });
+    }
+
     case FETCH_INGREDIENTS_FAILED:
-      return {
-        ...state,
-        error: true
-      }
+      return updateObject(state, { error: true })
 
     default:
       return state;
@@ -59,3 +60,4 @@ const burgerBuilderReducer = (state = initialState, action) => {
 }
 
 export default burgerBuilderReducer;
+
